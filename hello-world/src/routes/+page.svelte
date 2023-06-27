@@ -1,40 +1,6 @@
-<!-- <script>
 
-    let todos = ['',];
-
-    function addTodo(){
-        todos = [...todos,''];
-    }
-
-    function removeTodo(){
-
-    }
-    </script> 
-    
-    <main>
-        {#each todos as todo,index}
-            <input bind:value={todos[index]}>
-            <br>
-
-        {/each}
-
-        <button on:click={addTodo}>Add Todo</button>
-    </main> -->
 
 <script>
-
-	//     let todos = JSON.parse(localStorage.getItem('todos')) || [];  -----------------------------
-	//     $: {
-	// 	localStorage.setItem('todos', JSON.stringify(todos))
-	// }
-
-	//     let todos;                                                         ------------------------
-	  // if(localStorage.getItem("todos")===null){
-	  //   todos = [];
-	  // }
-	  // else {
-	  //   todos = JSON.parse(localStorage.getItem("todos"));
-	  // }
 
 	import { onMount } from 'svelte';
 
@@ -52,14 +18,12 @@
 		localStorage.setItem('todos', JSON.stringify(todos));
 	}
 
-	//  $:localStorage.setItem('todos', JSON.stringify(todos));          -----------------------------------------
 
-  // $:localStorage.setItem('todos', JSON.stringify(todos)); 
 	let value1 = '';
 	let line = '';
 
 	function addTodo(val) {
-		// todos.push(val)
+
 		if (val === '') {
 			alert('Please write something');
 			return;
@@ -77,7 +41,6 @@
 		console.log(todos);
 	}
 
-	$: console.log(todos);
 
 	function removeTodo(ind) {
 		todos = [...todos.slice(0, ind), ...todos.slice(ind + 1)];
@@ -96,7 +59,6 @@
 		saveTodos(); 
 	}
 
-	/////no empty todo
 </script>
 
 
@@ -104,15 +66,13 @@
 
 	<div>
 		<div
-			class="w-2/5 mx-auto mt-16 mb-8 py-10 bg-opacity-25 rounded-lg border-yellow-300 border-2 shadow-2xl"
-			id="bg"
-		>
-			<div class="text-center text-gray-400 text-4xl font-bold">TODO List</div>
+			class="bg-[url('src/assets/image.jpg')]  w-2/5 place-content-center  mx-auto mt-16 my-16 py-10 bg-opacity-25 rounded-lg border-yellow-300 border-2 shadow-2xl " id="bg">
+			<div class="text-center text-gray-400 text-4xl font-bold  ">TODO List</div>
 			<br />
-			<table class="table-auto border-separate border-spacing-4">
+			<ul class="">
 				{#each todos as todo, index (index)}
-					<tr>
-						<td class="text-center">
+					<li class="flex flex-row py-2">
+						<span class="basis-1/4 text-center">
 							<input
 								type="checkbox"
 								id={index}
@@ -121,28 +81,28 @@
 								}}
 								checked={todo.done}
 								class="accent-cyan-500 resize cursor-pointer h-4 w-4"
-							/></td
+							/></span
 						>
-						<td class="text-left text-white">
+						<span class="basis-1/2 text-white ">
 							&nbsp;&nbsp;&nbsp;&nbsp;<label
 								class="text-lg {todos[index].line} decoration-red-700 decoration-solid decoration-4"
 								for={index}
 							>
 								{todo.data}
-							</label></td
+							</label></span
 						>
-						<td class="text-center"
+						<span class="basis-1/4 text-center"
 							><button
 								on:click={() => {
 									removeTodo(index);
 								}}
 								class="bg-red-300/100 hover:bg-red-800 py-0.5 px-2 rounded-md text-white font-medium"
 								>Remove</button
-							></td
+							></span
 						>
-					</tr>
+					</li>
 				{/each}
-			</table>
+				</ul>
 
 			<br />
 			<div class="place-content-center">
@@ -160,16 +120,5 @@
 </main>
 
 <style>
-	#bg {
-		background-image: url('../assets/image.jpg');
-		background-repeat: no-repeat;
-	}
 
-	table {
-		width: 100%;
-	}
-
-	td {
-		width: 100px;
-	}
 </style>
